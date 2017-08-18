@@ -3,7 +3,7 @@
 namespace Bupy7\Queue\Test\Assert\Entity;
 
 use DateTime;
-use Bupy7\Queue\Exception\InvalidArgumentException;
+use InvalidArgumentException;
 use Bupy7\Queue\Entity\TaskInterface;
 
 /**

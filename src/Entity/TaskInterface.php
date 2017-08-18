@@ -17,9 +17,15 @@ interface TaskInterface
     public function setId(int $id): TaskInterface;
 
     public function getId(): int;
-    
+
+    /**
+     * Setting task command name for run.
+     */
     public function setName(string $name): TaskInterface;
 
+    /**
+     * Getting task command name for run.
+     */
     public function getName(): string;
 
     public function setStatusId(int $statusId): TaskInterface;
@@ -39,8 +45,6 @@ interface TaskInterface
     public function getStopAt(): ?DateTime;
 
     public function incNumberErrors(): TaskInterface;
-
-    public function setNumberErrors(int $numberErrors): TaskInterface;
 
     public function getNumberErrors(): int;
 }

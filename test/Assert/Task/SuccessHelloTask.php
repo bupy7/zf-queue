@@ -9,7 +9,7 @@ use Bupy7\Queue\Task\TaskInterface;
  */
 class SuccessHelloTask implements TaskInterface
 {
-    public function execute(): bool
+    public function execute(array $params): bool
     {
         return true;
     }

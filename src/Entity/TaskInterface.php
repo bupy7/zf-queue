@@ -46,5 +46,12 @@ interface TaskInterface
 
     public function incNumberErrors(): TaskInterface;
 
+    /**
+     * Returns number errors by default 0.
+     */
     public function getNumberErrors(): int;
+
+    public function setParams(array $params): TaskInterface;
+
+    public function getParams(): array;
 }

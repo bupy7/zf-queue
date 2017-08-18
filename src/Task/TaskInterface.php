@@ -7,5 +7,5 @@ namespace Bupy7\Queue\Task;
  */
 interface TaskInterface
 {
-    public function execute(): bool;
+    public function execute(array $params): bool;
 }

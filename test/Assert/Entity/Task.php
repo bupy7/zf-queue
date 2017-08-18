@@ -39,6 +39,10 @@ class Task implements TaskInterface
      * @var int
      */
     protected $numberErrors = 0;
+    /**
+     * @var array
+     */
+    protected $params = [];
 
     public function __construct()
     {
@@ -134,5 +138,16 @@ class Task implements TaskInterface
     public function getNumberErrors(): int
     {
         return $this->numberErrors;
+    }
+
+    public function setParams(array $params): TaskInterface
+    {
+        $this->params = $params;
+        return $this;
+    }
+
+    public function getParams(): array
+    {
+        return $this->params;
     }
 }

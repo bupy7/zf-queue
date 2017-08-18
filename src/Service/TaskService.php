@@ -8,8 +8,6 @@ use Bupy7\Queue\Manager\EntityManagerInterface;
 
 class TaskService
 {
-    private const DEFAULT_NUMBER_ERRORS = 0;
-
     /**
      * @var EntityManagerInterface
      */
@@ -27,8 +25,8 @@ class TaskService
         }
         $task->setStatusId(TaskInterface::STATUS_WAIT)
             ->setCreatedAt(new DateTime)
-            ->setNumberErrors(self::DEFAULT_NUMBER_ERRORS)
-            ->setName($data['name']);
+            ->setName($data['name'])
+            ->setParams($data['params'] ?? []);
         $this->entityManager->persist($task);
         $this->entityManager->flush();
     }

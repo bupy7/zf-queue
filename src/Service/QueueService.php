@@ -10,6 +10,7 @@ use DateTime;
 use Bupy7\Queue\Exception\UnknownTaskException;
 use Bupy7\Queue\Task\TaskInterface;
 use Bupy7\Queue\Options\ModuleOptions;
+use Exception;
 
 class QueueService
 {
@@ -45,15 +46,19 @@ class QueueService
     public function run(): void
     {
         $entities = $this->taskRepository->findForRun($this->config->getOneTimeLimit() ?: null);
-        foreach ($entities as $entity) {
-            if (in_array($entity->getStatusId(), [
-                TaskEntityInterface::STATUS_WAIT,
-                TaskEntityInterface::STATUS_ERROR,
-            ])) {
-                $this->executeTask($entity);
+        try {
+            foreach ($entities as $entity) {
+                if (in_array($entity->getStatusId(), [
+                    TaskEntityInterface::STATUS_WAIT,
+                    TaskEntityInterface::STATUS_ERROR,
+                ])) {
+                    $this->executeTask($entity);
+                }
             }
+        } catch (Exception $e) {
+            $this->entityManager->flush();
+            throw $e;
         }
-        $this->entityManager->flush();
     }
 
     protected function executeTask(TaskEntityInterface $entity): void
@@ -64,7 +69,7 @@ class QueueService
         /** @var TaskInterface $task */
         $task = $this->queueManager->get($entity->getName());
         $entity->setRunAt(new DateTime);
-        if ($task->execute()) {
+        if ($task->execute($entity->getParams())) {
             $entity->setStatusId(TaskEntityInterface::STATUS_OK);
         } else {
             $entity->incNumberErrors();

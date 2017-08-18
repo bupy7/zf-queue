@@ -32,7 +32,7 @@ class ModuleOptions extends AbstractOptions
 
     public function setErrorLimit(int $errorLimit): ModuleOptions
     {
-        $this->errorLimit = $errorLimit;
+        $this->errorLimit = $errorLimit >= 0 ? $errorLimit : 0;
         return $this;
     }
 

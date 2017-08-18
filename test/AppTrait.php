@@ -10,7 +10,7 @@ use Zend\Test\Util\ModuleLoader;
  */
 trait AppTrait
 {
-    protected function getSm(): ServiceManager
+    protected function getSm(array $config = []): ServiceManager
     {
         $moduleLoader = new ModuleLoader([
             'modules' => [
@@ -22,6 +22,7 @@ trait AppTrait
                     __DIR__ . '/../config/module.config.php',
                     __DIR__ . '/config/module.config.php',
                 ],
+                'extra_config' => $config,
                 'module_paths' => [],
                 'config_cache_enabled' => false,
                 'module_map_cache_enabled' => false,

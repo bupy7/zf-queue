@@ -7,6 +7,9 @@ namespace Bupy7\Queue\Manager;
  */
 interface EntityManagerInterface
 {
-    public function persist(object $entity): void;
+    /**
+     * @param object $entity
+     */
+    public function persist($entity): void;
     public function flush(): void;
 }

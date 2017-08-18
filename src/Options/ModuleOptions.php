@@ -21,7 +21,7 @@ class ModuleOptions extends AbstractOptions
 
     public function setOneTimeLimit(int $oneTimeLimit): ModuleOptions
     {
-        $this->oneTimeLimit = $oneTimeLimit;
+        $this->oneTimeLimit = $oneTimeLimit >= 0 ? $oneTimeLimit : 0;
         return $this;
     }
 

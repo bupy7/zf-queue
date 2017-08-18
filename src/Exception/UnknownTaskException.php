@@ -9,5 +9,4 @@ use UnexpectedValueException;
  */
 class UnknownTaskException extends UnexpectedValueException
 {
-
 }

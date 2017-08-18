@@ -8,7 +8,7 @@ use Bupy7\Queue\Exception\InvalidArgumentException;
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>
  */
-abstract class TaskAbstract
+class Task
 {
     public const STATUS_WAIT = 10;
     public const STATUS_ERROR = 20;
@@ -26,7 +26,7 @@ abstract class TaskAbstract
     /**
      * @var int
      */
-    protected $statusId;
+    protected $statusId = self::STATUS_WAIT;
     /**
      * @var DateTime
      */
@@ -43,26 +43,35 @@ abstract class TaskAbstract
      * @var int
      */
     protected $numberErrors = 0;
-    
+
+    public function __construct()
+    {
+        $this->createdAt = new DateTime;
+    }
+
+    public function setId(int $id): Task
+    {
+        $this->id = $id;
+        return $this;
+    }
+
     public function getId(): int
     {
         return $this->id;
     }
     
-    public function setName(string $name): TaskAbstract
+    public function setName(string $name): Task
     {
         $this->name = $name;
+        return $this;
     }
 
-    /**
-     * Getting task command name for run.
-     */
     public function getName(): string
     {
         return $this->name;
     }
 
-    public function setStatusId(int $statusId): TaskAbstract
+    public function setStatusId(int $statusId): Task
     {
         if (!in_array($statusId, [
             self::STATUS_WAIT,
@@ -73,6 +82,7 @@ abstract class TaskAbstract
             throw new InvalidArgumentException('"statusId" is invalid.');
         }
         $this->statusId = $statusId;
+        return $this;
     }
 
     public function getStatusId(): int
@@ -80,7 +90,7 @@ abstract class TaskAbstract
         return $this->statusId;
     }
 
-    public function setCreatedAt(DateTime $createdAt): TaskAbstract
+    public function setCreatedAt(DateTime $createdAt): Task
     {
         $this->createdAt = $createdAt;
         return $this;
@@ -91,7 +101,7 @@ abstract class TaskAbstract
         return $this->createdAt;
     }
 
-    public function setRunAt(DateTime $runAt): TaskAbstract
+    public function setRunAt(DateTime $runAt): Task
     {
         $this->runAt = $runAt;
         return $this;
@@ -102,7 +112,7 @@ abstract class TaskAbstract
         return $this->runAt;
     }
 
-    public function setStopAt(DateTime $stopAt): TaskAbstract
+    public function setStopAt(DateTime $stopAt): Task
     {
         $this->stopAt = $stopAt;
         return $this;
@@ -113,9 +123,9 @@ abstract class TaskAbstract
         return $this->stopAt;
     }
 
-    public function incNumberErrors(): TaskAbstract
+    public function incNumberErrors(int $inc = 1): Task
     {
-        ++$this->numberErrors;
+        $this->numberErrors += $inc;
         return $this;
     }
 

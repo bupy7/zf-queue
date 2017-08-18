@@ -4,7 +4,6 @@ namespace Bupy7\Queue\Manager;
 
 use Bupy7\Queue\Task\TaskInterface;
 use Zend\ServiceManager\AbstractPluginManager;
-use Symfony\Component\Console\Command\Command;
 use Zend\EventManager\EventManagerAwareInterface;
 use Interop\Container\ContainerInterface;
 
@@ -13,6 +12,7 @@ use Interop\Container\ContainerInterface;
  */
 class QueueManager extends AbstractPluginManager
 {
+    protected $autoAddInvokableClass = false;
     protected $instanceOf = TaskInterface::class;
 
     public function __construct($configOrContainerInstance, array $config = [])
@@ -21,13 +21,13 @@ class QueueManager extends AbstractPluginManager
         parent::__construct($configOrContainerInstance, $config);
     }
 
-    public function injectEventManager(ContainerInterface $container, Command $command)
+    public function injectEventManager(ContainerInterface $container, TaskInterface $task)
     {
-        if (!$command instanceof EventManagerAwareInterface) {
+        if (!$task instanceof EventManagerAwareInterface) {
             return;
         }
-        if (!$command->getEventManager()) {
-            $command->setEventManager($container->get('EventManager'));
+        if (!$task->getEventManager()) {
+            $task->setEventManager($container->get('EventManager'));
         }
     }
 }

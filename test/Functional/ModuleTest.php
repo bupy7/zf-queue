@@ -1,6 +1,6 @@
 <?php
 
-namespace Bupy7\Queue\Test;
+namespace Bupy7\Queue\Test\Functional;
 
 use PHPUnit\Framework\TestCase;
 use Zend\Test\Util\ModuleLoader;

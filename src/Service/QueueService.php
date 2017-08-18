@@ -3,7 +3,7 @@
 namespace Bupy7\Queue\Service;
 
 use Bupy7\Queue\Repository\TaskRepositoryInterface;
-use Bupy7\Queue\Entity\Task as TaskEntity;
+use Bupy7\Queue\Entity\TaskInterface as TaskEntityInterface;
 use Bupy7\Queue\Manager\EntityManagerInterface;
 use Bupy7\Queue\Manager\QueueManager;
 use DateTime;
@@ -47,8 +47,8 @@ class QueueService
         $entities = $this->taskRepository->findForRun($this->config->getOneTimeLimit() ?: null);
         foreach ($entities as $entity) {
             if (in_array($entity->getStatusId(), [
-                TaskEntity::STATUS_WAIT,
-                TaskEntity::STATUS_ERROR,
+                TaskEntityInterface::STATUS_WAIT,
+                TaskEntityInterface::STATUS_ERROR,
             ])) {
                 $this->executeTask($entity);
             }
@@ -56,7 +56,7 @@ class QueueService
         $this->entityManager->flush();
     }
 
-    protected function executeTask(TaskEntity $entity): void
+    protected function executeTask(TaskEntityInterface $entity): void
     {
         if (!$this->queueManager->has($entity->getName())) {
             throw new UnknownTaskException(sprintf('"%s task is unknown."', $entity->getName()));
@@ -65,16 +65,16 @@ class QueueService
         $task = $this->queueManager->get($entity->getName());
         $entity->setRunAt(new DateTime);
         if ($task->execute()) {
-            $entity->setStatusId(TaskEntity::STATUS_OK);
+            $entity->setStatusId(TaskEntityInterface::STATUS_OK);
         } else {
             $entity->incNumberErrors();
             if (
                 $this->config->getErrorLimit() !== 0
                 && $entity->getNumberErrors() >= $this->config->getErrorLimit()
             ) {
-                $entity->setStatusId(TaskEntity::STATUS_IMPOSSIBLE);
+                $entity->setStatusId(TaskEntityInterface::STATUS_IMPOSSIBLE);
             } else {
-                $entity->setStatusId(TaskEntity::STATUS_ERROR);
+                $entity->setStatusId(TaskEntityInterface::STATUS_ERROR);
             }
         }
         $entity->setStopAt(new DateTime);

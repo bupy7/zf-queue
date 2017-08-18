@@ -1,10 +1,10 @@
 <?php
 
-namespace Bupy7\Queue\Test\Service;
+namespace Bupy7\Queue\Test\Functional\Service;
 
 use PHPUnit\Framework\TestCase;
-use Bupy7\Queue\Test\AppTrait;
-use Bupy7\Queue\Entity\Task;
+use Bupy7\Queue\Test\Functional\AppTrait;
+use Bupy7\Queue\Entity\TaskInterface;
 
 /**
  * @author Belosludcev Vasily <https://github.com/bupy7>
@@ -20,13 +20,13 @@ class QueueServiceTest extends TestCase
         $queueService = $sm->get('MemoryQueueService');
         $queueService->run();
 
-        $tasks = $sm->get('MemoryTaskRepository')->findByStatusId(Task::STATUS_ERROR);
+        $tasks = $sm->get('MemoryTaskRepository')->findByStatusId(TaskInterface::STATUS_ERROR);
         $this->assertEquals(1, count($tasks));
 
-        $tasks = $sm->get('MemoryTaskRepository')->findByStatusId(Task::STATUS_OK);
+        $tasks = $sm->get('MemoryTaskRepository')->findByStatusId(TaskInterface::STATUS_OK);
         $this->assertEquals(1, count($tasks));
 
-        $tasks = $sm->get('MemoryTaskRepository')->findByStatusId(Task::STATUS_IMPOSSIBLE);
+        $tasks = $sm->get('MemoryTaskRepository')->findByStatusId(TaskInterface::STATUS_IMPOSSIBLE);
         $this->assertEquals(1, count($tasks));
     }
 }

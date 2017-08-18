@@ -1,11 +1,10 @@
 <?php
 
-namespace Bupy7\Queue\Test\Options;
+namespace Bupy7\Queue\Test\Functional\Options;
 
 use PHPUnit\Framework\TestCase;
 use Bupy7\Queue\Options\ModuleOptions;
-use Bupy7\Queue\Test\AppTrait;
-use Queue\Hydrator\ArrayHydrator;
+use Bupy7\Queue\Test\Functional\AppTrait;
 
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>

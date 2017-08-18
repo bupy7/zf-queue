@@ -3,7 +3,7 @@
 namespace Bupy7\Queue\Test\Assert\Repository;
 
 use Bupy7\Queue\Repository\TaskRepositoryInterface;
-use Bupy7\Queue\Entity\Task;
+use Bupy7\Queue\Test\Assert\Entity\Task;
 
 class MemoryTaskRepository implements TaskRepositoryInterface
 {
@@ -18,7 +18,7 @@ class MemoryTaskRepository implements TaskRepositoryInterface
             (new Task)->setId(1)->setName('Bupy7\Queue\Test\Assert\Task\ErrorHelloTask'),
             (new Task)->setId(2)->setName('Bupy7\Queue\Test\Assert\Task\SuccessHelloTask'),
             (new Task)->setId(3)
-                ->incNumberErrors(4)
+                ->setNumberErrors(4)
                 ->setStatusId(Task::STATUS_ERROR)
                 ->setName('Bupy7\Queue\Test\Assert\Task\ErrorHelloTask'),
         ];

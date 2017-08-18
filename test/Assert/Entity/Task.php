@@ -1,20 +1,16 @@
 <?php
 
-namespace Bupy7\Queue\Entity;
+namespace Bupy7\Queue\Test\Assert\Entity;
 
 use DateTime;
 use Bupy7\Queue\Exception\InvalidArgumentException;
+use Bupy7\Queue\Entity\TaskInterface;
 
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>
  */
-class Task
+class Task implements TaskInterface
 {
-    public const STATUS_WAIT = 10;
-    public const STATUS_ERROR = 20;
-    public const STATUS_OK = 30;
-    public const STATUS_IMPOSSIBLE = 40;
-
     /**
      * @var int
      */
@@ -49,7 +45,7 @@ class Task
         $this->createdAt = new DateTime;
     }
 
-    public function setId(int $id): Task
+    public function setId(int $id): TaskInterface
     {
         $this->id = $id;
         return $this;
@@ -60,7 +56,7 @@ class Task
         return $this->id;
     }
     
-    public function setName(string $name): Task
+    public function setName(string $name): TaskInterface
     {
         $this->name = $name;
         return $this;
@@ -71,7 +67,7 @@ class Task
         return $this->name;
     }
 
-    public function setStatusId(int $statusId): Task
+    public function setStatusId(int $statusId): TaskInterface
     {
         if (!in_array($statusId, [
             self::STATUS_WAIT,
@@ -90,7 +86,7 @@ class Task
         return $this->statusId;
     }
 
-    public function setCreatedAt(DateTime $createdAt): Task
+    public function setCreatedAt(DateTime $createdAt): TaskInterface
     {
         $this->createdAt = $createdAt;
         return $this;
@@ -101,7 +97,7 @@ class Task
         return $this->createdAt;
     }
 
-    public function setRunAt(DateTime $runAt): Task
+    public function setRunAt(DateTime $runAt): TaskInterface
     {
         $this->runAt = $runAt;
         return $this;
@@ -112,7 +108,7 @@ class Task
         return $this->runAt;
     }
 
-    public function setStopAt(DateTime $stopAt): Task
+    public function setStopAt(DateTime $stopAt): TaskInterface
     {
         $this->stopAt = $stopAt;
         return $this;
@@ -123,9 +119,15 @@ class Task
         return $this->stopAt;
     }
 
-    public function incNumberErrors(int $inc = 1): Task
+    public function incNumberErrors(): TaskInterface
     {
-        $this->numberErrors += $inc;
+        ++$this->numberErrors;
+        return $this;
+    }
+
+    public function setNumberErrors(int $numberErrors): TaskInterface
+    {
+        $this->numberErrors = $numberErrors;
         return $this;
     }
 

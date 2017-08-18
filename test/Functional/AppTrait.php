@@ -1,6 +1,6 @@
 <?php
 
-namespace Bupy7\Queue\Test;
+namespace Bupy7\Queue\Test\Functional;
 
 use Zend\ServiceManager\ServiceManager;
 use Zend\Test\Util\ModuleLoader;
@@ -19,8 +19,7 @@ trait AppTrait
             ],
             'module_listener_options' => [
                 'config_glob_paths' => [
-                    __DIR__ . '/../config/module.config.php',
-                    __DIR__ . '/config/module.config.php',
+                    __DIR__ . '/_file/config/module.config.php',
                 ],
                 'extra_config' => $config,
                 'module_paths' => [],

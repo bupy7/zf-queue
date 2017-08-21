@@ -3,6 +3,7 @@
 namespace Bupy7\Queue\Entity;
 
 use DateTime;
+use Zend\Stdlib\ParametersInterface;
 
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>
@@ -53,7 +54,7 @@ interface TaskInterface
      */
     public function getNumberErrors(): int;
 
-    public function setParams(array $params): TaskInterface;
+    public function setParams(ParametersInterface $params): TaskInterface;
 
-    public function getParams(): array;
+    public function getParams(): ParametersInterface;
 }

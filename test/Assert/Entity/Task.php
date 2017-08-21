@@ -5,6 +5,8 @@ namespace Bupy7\Queue\Test\Assert\Entity;
 use DateTime;
 use InvalidArgumentException;
 use Bupy7\Queue\Entity\TaskInterface;
+use Zend\Stdlib\ParametersInterface;
+use Zend\Stdlib\Parameters;
 
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>
@@ -40,13 +42,14 @@ class Task implements TaskInterface
      */
     protected $numberErrors = 0;
     /**
-     * @var array
+     * @var ParametersInterface
      */
-    protected $params = [];
+    protected $params;
 
     public function __construct()
     {
         $this->createdAt = new DateTime;
+        $this->params = new Parameters;
     }
 
     public function setId(int $id): TaskInterface
@@ -140,13 +143,13 @@ class Task implements TaskInterface
         return $this->numberErrors;
     }
 
-    public function setParams(array $params): TaskInterface
+    public function setParams(ParametersInterface $params): TaskInterface
     {
         $this->params = $params;
         return $this;
     }
 
-    public function getParams(): array
+    public function getParams(): ParametersInterface
     {
         return $this->params;
     }

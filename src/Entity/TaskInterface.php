@@ -44,6 +44,8 @@ interface TaskInterface
 
     public function getStopAt(): ?DateTime;
 
+    public function setNumberErrors(int $numberErrors): TaskInterface;
+
     public function incNumberErrors(): TaskInterface;
 
     /**

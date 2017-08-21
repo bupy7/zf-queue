@@ -26,6 +26,7 @@ class TaskService
         $task->setStatusId(TaskInterface::STATUS_WAIT)
             ->setCreatedAt(new DateTime)
             ->setName($data['name'])
+            ->setNumberErrors(0)
             ->setParams($data['params'] ?? []);
         $this->entityManager->persist($task);
         $this->entityManager->flush();

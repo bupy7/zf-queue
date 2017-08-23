@@ -43,7 +43,8 @@
         }
     },
     "scripts": {
-        "test": "php vendor/bin/phpunit --debug",
+        "test": "php vendor/bin/phpunit --debug --verbose",
+        "test:no-coverage": "php vendor/bin/phpunit --debug --verbose --no-coverage",
         "fixer": "php vendor/bin/php-cs-fixer fix --config=phpcs.php"
     }
 }

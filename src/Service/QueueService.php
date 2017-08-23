@@ -10,7 +10,6 @@ use DateTime;
 use Bupy7\Queue\Exception\UnknownTaskException;
 use Bupy7\Queue\Task\TaskInterface;
 use Bupy7\Queue\Options\ModuleOptions;
-use Exception;
 
 class QueueService
 {
@@ -55,9 +54,8 @@ class QueueService
                     $this->executeTask($entity);
                 }
             }
-        } catch (Exception $e) {
+        } finally {
             $this->entityManager->flush();
-            throw $e;
         }
     }
 

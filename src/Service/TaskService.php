@@ -5,6 +5,7 @@ namespace Bupy7\Queue\Service;
 use Bupy7\Queue\Entity\TaskInterface;
 use DateTime;
 use Bupy7\Queue\Manager\EntityManagerInterface;
+use Zend\Stdlib\Parameters;
 
 class TaskService
 {
@@ -26,9 +27,12 @@ class TaskService
         $task->setStatusId(TaskInterface::STATUS_WAIT)
             ->setCreatedAt(new DateTime)
             ->setName($data['name'])
-            ->setNumberErrors(0)
-            ->setParams($data['params'] ?? []);
+            ->setNumberErrors(0);
+        if (isset($data['params'])) {
+            $task->setParams(new Parameters($data['params']));
+        }
         $this->entityManager->persist($task);
         $this->entityManager->flush();
+        return true;
     }
 }

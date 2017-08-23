@@ -39,4 +39,14 @@ class MemoryTaskRepository implements TaskRepositoryInterface
         }
         return $result;
     }
+
+    public function find(int $id): ?Task
+    {
+        foreach ($this->entities as $entity) {
+            if ($entity->getId() == $id) {
+                return $entity;
+            }
+        }
+        return null;
+    }
 }

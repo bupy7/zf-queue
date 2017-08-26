@@ -81,6 +81,5 @@ class QueueService
             }
         }
         $entity->setStopAt(new DateTime);
-        $this->entityManager->persist($entity);
     }
 }

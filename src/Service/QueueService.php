@@ -74,6 +74,7 @@ class QueueService implements EventManagerAwareInterface
 
         /** @var TaskInterface $task */
         $task = $this->queueManager->get($entity->getName());
+
         try {
             if ($task->execute($entity->getParams())) {
                 $entity->setStatusId(TaskEntityInterface::STATUS_OK);
@@ -89,12 +90,12 @@ class QueueService implements EventManagerAwareInterface
         } finally {
             if ($entity->getStatusId() === TaskEntityInterface::STATUS_ERROR) {
                 $entity->incNumberErrors();
-            }
-            if (
-                $this->config->getErrorLimit() !== 0
-                && $entity->getNumberErrors() >= $this->config->getErrorLimit()
-            ) {
-                $entity->setStatusId(TaskEntityInterface::STATUS_IMPOSSIBLE);
+                if (
+                    $this->config->getErrorLimit() !== 0
+                    && $entity->getNumberErrors() >= $this->config->getErrorLimit()
+                ) {
+                    $entity->setStatusId(TaskEntityInterface::STATUS_IMPOSSIBLE);
+                }
             }
             $entity->setStopAt(new DateTime);
         }

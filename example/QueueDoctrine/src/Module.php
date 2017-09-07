@@ -10,7 +10,6 @@ class Module implements ConfigProviderInterface
     {
         return array_merge(
             require __DIR__ . '/../config/module.config.php',
-            require __DIR__ . '/../config/cli.config.php',
             require __DIR__ . '/../config/doctrine.config.php'
         );
     }

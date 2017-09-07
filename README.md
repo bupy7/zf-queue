@@ -44,7 +44,7 @@ TODO
 Usage
 -----
 
-### Create and run task
+### Create task
 
 **Let's create our first an example task for queue:**
 
@@ -80,6 +80,8 @@ class SendAccountTask implements TaskInterface
     }
 }
 ```
+
+### Run task
 
 **After you need to register task to queue manager**:
 

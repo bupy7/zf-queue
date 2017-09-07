@@ -21,7 +21,7 @@ Install
 Usage
 -----
 
-1: [Create a task](https://github.com/bupy7/zf-queue/README.md#create-task)
+1: [Create a task](https://github.com/bupy7/zf-queue#create-task)
 
 2: Add the task to queue:
 

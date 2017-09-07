@@ -12,11 +12,19 @@ Requirements
 Install
 -------
 
-1. Copy `QueueDoctrine` to your `module` directory.
+1: Copy `QueueDoctrine` to your `module` directory.
 
-2. Add `QueueDoctrine` to your config of module list.
+2: Add `QueueDoctrine` to your config of module list.
 
-4. Profit.
+3: Run create scheme:
+
+```
+$ console orm:schema-tool:create
+```
+
+> You must have console application to run this command.
+
+4: Profit.
 
 Usage
 -----

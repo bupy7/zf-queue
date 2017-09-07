@@ -73,14 +73,15 @@ class QueueService
                 $entity->setStatusId(TaskEntityInterface::STATUS_OK);
             } else {
                 $entity->setStatusId(TaskEntityInterface::STATUS_ERROR);
-                $entity->incNumberErrors();
             }
         } catch (Exception $e) {
             $entity->setStatusId(TaskEntityInterface::STATUS_ERROR);
-            $entity->incNumberErrors();
 
             // @TODO: Logging
         } finally {
+            if ($entity->getStatusId() === TaskEntityInterface::STATUS_ERROR) {
+                $entity->incNumberErrors();
+            }
             if (
                 $this->config->getErrorLimit() !== 0
                 && $entity->getNumberErrors() >= $this->config->getErrorLimit()

@@ -8,6 +8,12 @@ namespace Bupy7\Queue\Manager;
 interface EntityManagerInterface
 {
     /**
+     * @param string $name
+     * @return object|null
+     * @throws \Bupy7\Queue\Exception\UnknownEntityException
+     */
+    public function newInstance(string $name);
+    /**
      * @param object $entity
      */
     public function persist($entity): void;

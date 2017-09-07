@@ -27,7 +27,7 @@ interface TaskInterface
     /**
      * Getting task command name for run.
      */
-    public function getName(): ?string;
+    public function getName(): string;
 
     public function setStatusId(int $statusId): TaskInterface;
 

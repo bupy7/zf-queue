@@ -46,13 +46,8 @@ class Task implements TaskInterface
      */
     protected $params;
 
-    public function __construct(string $name)
+    public function __construct()
     {
-        if (empty($name)) {
-            throw new InvalidArgumentException('"name" is required');
-        }
-        $this->setName($name);
-
         $this->createdAt = new DateTime;
         $this->params = new Parameters;
     }

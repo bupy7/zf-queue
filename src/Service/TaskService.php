@@ -5,6 +5,7 @@ namespace Bupy7\Queue\Service;
 use Bupy7\Queue\Entity\TaskInterface;
 use DateTime;
 use Bupy7\Queue\Manager\EntityManagerInterface;
+use Bupy7\Queue\Exception\InvalidValueException;
 
 class TaskService
 {
@@ -18,13 +19,20 @@ class TaskService
         $this->entityManager = $entityManager;
     }
 
-    public function add(TaskInterface $task): bool
+    public function add(string $name, array $params): bool
     {
-        if (empty($task->getName())) {
-            throw new InvalidArgumentException(sprintf('%s::$name is required', get_class($task)));
+        $task = $this->entityManager->newInstance(TaskInterface::class);
+        if (!$task instanceof TaskInterface) {
+            throw new InvalidValueException(sprintf(
+                'The class "%s" is invalid. Expected instance of "%s"',
+                get_class($task),
+                TaskInterface::class
+            ));
         }
 
-        $task->setStatusId(TaskInterface::STATUS_WAIT)
+        $task->getParams()->fromArray($params);
+        $task->setName($name)
+            ->setStatusId(TaskInterface::STATUS_WAIT)
             ->setCreatedAt(new DateTime)
             ->setNumberErrors(0);
 

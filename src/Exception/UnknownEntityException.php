@@ -7,6 +7,6 @@ use LogicException;
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>
  */
-class UnknownTaskException extends LogicException
+class UnknownEntityException extends LogicException
 {
 }

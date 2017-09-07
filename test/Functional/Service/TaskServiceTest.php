@@ -28,24 +28,10 @@ class TaskServiceTest extends TestCase
     {
         $sm = $this->getSm($this->memoryConfig);
 
-        $task = new Task('Bupy7\Queue\Test\Assert\Command\SomeCommand');
-        $task->getParams()->fromArray(['email' => 'some@email.com']);
-        $result = $sm->get('MemoryTaskService')->add($task);
+        $result = $sm->get('MemoryTaskService')->add('Bupy7\Queue\Test\Assert\Command\SomeCommand', [
+            'email' => 'some@email.com',
+        ]);
 
         $this->assertTrue($result);
-        $this->assertEquals('Bupy7\Queue\Test\Assert\Command\SomeCommand', $task->getName());
-        $this->assertEquals('some@email.com', $task->getParams()->get('email'));
-    }
-
-    /**
-     * @expectedException \Bupy7\Queue\Exception\InvalidArgumentException
-     */
-    public function testAddError()
-    {
-        $sm = $this->getSm($this->memoryConfig);
-
-        $task = new Task('');
-        $task->getParams()->fromArray(['email' => 'some@email.com']);
-        $result = $sm->get('MemoryTaskService')->add($task);
     }
 }

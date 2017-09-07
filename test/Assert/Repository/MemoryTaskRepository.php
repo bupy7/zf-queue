@@ -10,16 +10,17 @@ class MemoryTaskRepository implements TaskRepositoryInterface
     /**
      * @var array
      */
-    private $entities = [];
+    public $entities = [];
 
     public function __construct()
     {
         $this->entities = [
-            (new Task('Bupy7\Queue\Test\Assert\Task\ErrorHelloTask'))->setId(1),
-            (new Task('Bupy7\Queue\Test\Assert\Task\SuccessHelloTask'))->setId(2),
-            (new Task('Bupy7\Queue\Test\Assert\Task\ErrorHelloTask'))->setId(3)
+            (new Task)->setId(1)->setName('Bupy7\Queue\Test\Assert\Task\ErrorHelloTask'),
+            (new Task)->setId(2)->setName('Bupy7\Queue\Test\Assert\Task\SuccessHelloTask'),
+            (new Task)->setId(3)
                 ->setNumberErrors(4)
-                ->setStatusId(Task::STATUS_ERROR),
+                ->setStatusId(Task::STATUS_ERROR)
+                ->setName('Bupy7\Queue\Test\Assert\Task\ErrorHelloTask'),
         ];
     }
 

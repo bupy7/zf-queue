@@ -24,28 +24,28 @@ class TaskServiceTest extends TestCase
         ],
     ];
 
-    public function testCreateSuccess()
+    public function testAddSuccess()
     {
         $sm = $this->getSm($this->memoryConfig);
 
-        $task = new Task;
-        $result = $sm->get('MemoryTaskService')->create([
-            'name' => 'Bupy7\Queue\Test\Assert\Command\SomeCommand',
-            'params' => ['email' => 'some@email.com']
-        ], $task);
+        $task = new Task('Bupy7\Queue\Test\Assert\Command\SomeCommand');
+        $task->getParams()->fromArray(['email' => 'some@email.com']);
+        $result = $sm->get('MemoryTaskService')->add($task);
 
         $this->assertTrue($result);
         $this->assertEquals('Bupy7\Queue\Test\Assert\Command\SomeCommand', $task->getName());
         $this->assertEquals('some@email.com', $task->getParams()->get('email'));
     }
 
-    public function testCreateError()
+    /**
+     * @expectedException \Bupy7\Queue\Exception\InvalidArgumentException
+     */
+    public function testAddError()
     {
         $sm = $this->getSm($this->memoryConfig);
 
-        $task = new Task;
-        $result = $sm->get('MemoryTaskService')->create(['params' => ['email' => 'some@email.com']], $task);
-
-        $this->assertFalse($result);
+        $task = new Task('');
+        $task->getParams()->fromArray(['email' => 'some@email.com']);
+        $result = $sm->get('MemoryTaskService')->add($task);
     }
 }

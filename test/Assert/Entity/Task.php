@@ -3,7 +3,7 @@
 namespace Bupy7\Queue\Test\Assert\Entity;
 
 use DateTime;
-use InvalidArgumentException;
+use Bupy7\Queue\Exception\InvalidArgumentException;
 use Bupy7\Queue\Entity\TaskInterface;
 use Zend\Stdlib\ParametersInterface;
 use Zend\Stdlib\Parameters;
@@ -46,8 +46,13 @@ class Task implements TaskInterface
      */
     protected $params;
 
-    public function __construct()
+    public function __construct(string $name)
     {
+        if (empty($name)) {
+            throw new InvalidArgumentException('"name" is required');
+        }
+        $this->setName($name);
+
         $this->createdAt = new DateTime;
         $this->params = new Parameters;
     }

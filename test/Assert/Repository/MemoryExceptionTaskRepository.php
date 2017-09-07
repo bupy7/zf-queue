@@ -15,7 +15,7 @@ class MemoryExceptionTaskRepository implements TaskRepositoryInterface
     public function __construct()
     {
         $this->entities = [
-            (new Task)->setId(1)->setName('Bupy7\Queue\Test\Assert\Task\NotExistsTask'),
+            (new Task('Bupy7\Queue\Test\Assert\Task\NotExistsTask'))->setId(1),
         ];
     }
 

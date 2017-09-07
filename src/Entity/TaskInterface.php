@@ -11,9 +11,10 @@ use Zend\Stdlib\ParametersInterface;
 interface TaskInterface
 {
     public const STATUS_WAIT = 10;
-    public const STATUS_ERROR = 20;
-    public const STATUS_OK = 30;
-    public const STATUS_IMPOSSIBLE = 40;
+    public const STATUS_IN_PROCESSING = 20;
+    public const STATUS_ERROR = 30;
+    public const STATUS_OK = 40;
+    public const STATUS_IMPOSSIBLE = 50;
 
     public function setId(int $id): TaskInterface;
 

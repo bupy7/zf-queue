@@ -78,6 +78,7 @@ class Task implements TaskInterface
     {
         if (!in_array($statusId, [
             self::STATUS_WAIT,
+            self::STATUS_IN_PROCESSING,
             self::STATUS_ERROR,
             self::STATUS_OK,
             self::STATUS_IMPOSSIBLE,

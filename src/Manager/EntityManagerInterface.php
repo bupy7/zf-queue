@@ -10,7 +10,6 @@ interface EntityManagerInterface
     /**
      * @param string $name
      * @return object|null
-     * @throws \Bupy7\Queue\Exception\UnknownEntityException
      */
     public function newInstance(string $name);
     /**

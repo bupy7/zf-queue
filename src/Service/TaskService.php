@@ -19,7 +19,7 @@ class TaskService
         $this->entityManager = $entityManager;
     }
 
-    public function add(string $name, array $params): bool
+    public function add(string $name, array $params): void
     {
         $task = $this->entityManager->newInstance(TaskInterface::class);
         if (!$task instanceof TaskInterface) {
@@ -38,7 +38,5 @@ class TaskService
 
         $this->entityManager->persist($task);
         $this->entityManager->flush();
-
-        return true;
     }
 }

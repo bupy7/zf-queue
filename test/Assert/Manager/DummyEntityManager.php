@@ -3,26 +3,37 @@
 namespace Bupy7\Queue\Test\Assert\Manager;
 
 use Bupy7\Queue\Manager\EntityManagerInterface;
-use Bupy7\Queue\Exception\UnknownEntityException;
 use Bupy7\Queue\Test\Assert\Entity\Task;
 
 class DummyEntityManager implements EntityManagerInterface
 {
+    /**
+     * @var Task[]
+     */
+    public $persist = [];
+    /**
+     * @var Task[]
+     */
+    public $saved = [];
+
     public function newInstance(string $name)
     {
         if ($name !== 'Bupy7\Queue\Entity\TaskInterface') {
-            throw new UnknownEntityException;
+            return null;
         }
         return new Task;
     }
 
     public function persist($entity): void
     {
-        // dummy
+        $this->persist[] = $entity;
     }
 
     public function flush(): void
     {
-        // dummy
+        foreach ($this->persist as $entity) {
+            $this->saved[spl_object_hash($entity)] = $entity;
+        }
+        $this->persist = [];
     }
 }

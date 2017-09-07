@@ -5,6 +5,7 @@ namespace Bupy7\Queue\Test\Functional\Service;
 use PHPUnit\Framework\TestCase;
 use Bupy7\Queue\Test\Functional\AppTrait;
 use Bupy7\Queue\Test\Assert\Entity\Task;
+use DateTime;
 
 /**
  * @author Belosludcev Vasily <https://github.com/bupy7>
@@ -28,10 +29,19 @@ class TaskServiceTest extends TestCase
     {
         $sm = $this->getSm($this->memoryConfig);
 
-        $result = $sm->get('MemoryTaskService')->add('Bupy7\Queue\Test\Assert\Command\SomeCommand', [
+        $sm->get('MemoryTaskService')->add('Bupy7\Queue\Test\Assert\Command\SomeCommand', [
             'email' => 'some@email.com',
         ]);
 
-        $this->assertTrue($result);
+        /** @var \Bupy7\Queue\Test\Assert\Manager\DummyEntityManager $saved */
+        $em = $sm->get('DummyEntityManager');
+
+        /** @var Task $result */
+        $result = end($em->saved);
+        $this->assertEquals($result->getParams()->toArray(), ['email' => 'some@email.com']);
+        $this->assertEquals(Task::STATUS_WAIT, $result->getStatusId());
+        $this->assertEquals(0, $result->getNumberErrors());
+        $this->assertInstanceOf(DateTime::class, $result->getCreatedAt());
+        $this->assertEquals('Bupy7\Queue\Test\Assert\Command\SomeCommand', $result->getName());
     }
 }

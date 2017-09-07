@@ -10,8 +10,10 @@ class QueueServiceFactory implements FactoryInterface
 {
     public function __invoke(ContainerInterface $container, $requestedName, array $options = null): QueueService
     {
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $container->get('Doctrine\ORM\EntityManager');
         return new QueueService(
-            $container->get('QueueDoctrine\Repository\TaskRepository'),
+            $em->getRepository('QueueDoctrine\Entity\Task'),
             $container->get('QueueDoctrine\Manager\EntityManager'),
             $container->get('Bupy7\Queue\Manager\QueueManager'),
             $container->get('Bupy7\Queue\Options\ModuleOptions')

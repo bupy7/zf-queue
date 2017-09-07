@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<doctrine-mapping xmlns="http://doctrine-project.org/schemas/orm/doctrine-mapping"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://doctrine-project.org/schemas/orm/doctrine-mapping
+        http://doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="QueueDoctrine\Entity\Task" table="queue_task"
+        repository-class="QueueDoctrine\Repository\TaskRepository">
+
+        <indexes>
+            <index name="queue_task_idx_1" columns="status_id"/>
+        </indexes>
+
+        <lifecycle-callbacks>
+            <lifecycle-callback type="preFlush" method="preFlush"/>
+        </lifecycle-callbacks>
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="IDENTITY"/>
+        </id>
+
+        <field name="name" type="string" column="name"/>
+        <field name="statusId" type="smallint" column="status_id"/>
+        <field name="createdAt" type="datetime" column="created_at"/>
+        <field name="runAt" type="datetime" column="run_at" nullable="true"/>
+        <field name="stopAt" type="datetime" column="stop_at" nullable="true"/>
+        <field name="numberErrors" type="smallint" column="number_errors"/>
+        <field name="params" type="params" column="params"/>
+    </entity>
+</doctrine-mapping>

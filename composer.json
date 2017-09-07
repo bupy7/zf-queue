@@ -1,7 +1,7 @@
 {
     "name": "bupy7/zf-queue",
     "description": "Queue module for Zend Framework 3.",
-    "version": "0.9.0",
+    "version": "1.0.0-alpha",
     "license": "BSD-3-Clause",
     "keywords": [
         "zend",

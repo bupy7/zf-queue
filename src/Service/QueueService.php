@@ -68,12 +68,12 @@ class QueueService implements EventManagerAwareInterface
             throw new UnknownTaskException(sprintf('"%s task is unknown."', $entity->getName()));
         }
 
-        /** @var TaskInterface $task */
-        $task = $this->queueManager->get($entity->getName());
         $entity->setRunAt(new DateTime);
         $entity->setStatusId(TaskEntityInterface::STATUS_IN_PROCESSING);
         $this->entityManager->flush($entity);
 
+        /** @var TaskInterface $task */
+        $task = $this->queueManager->get($entity->getName());
         try {
             if ($task->execute($entity->getParams())) {
                 $entity->setStatusId(TaskEntityInterface::STATUS_OK);

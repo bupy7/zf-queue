@@ -62,7 +62,7 @@ class SendAccountTask implements TaskInterface
     /**
      * @var ChatService
      */
-    protected $mailService;
+    protected $chatService;
 
     public function __construct(ChatService $chatService) {
         $this->chatService = $chatService;
@@ -121,7 +121,7 @@ class Module
 **Add the task to queue**
 
 ```php
-$container->get('Bupy7\Queue\Service\TaskService')->add('YourModule\Task\ExampleTask');
+$container->get('Bupy7\Queue\Service\QueueService')->add('YourModule\Task\ExampleTask');
 ```
 
 **Run queue**

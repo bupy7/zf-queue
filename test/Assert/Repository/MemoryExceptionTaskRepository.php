@@ -10,7 +10,7 @@ class MemoryExceptionTaskRepository implements TaskRepositoryInterface
     /**
      * @var array
      */
-    private $entities = [];
+    public $entities = [];
 
     public function __construct()
     {

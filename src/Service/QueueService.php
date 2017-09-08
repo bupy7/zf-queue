@@ -13,10 +13,12 @@ use Bupy7\Queue\Options\ModuleOptions;
 use Exception;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerAwareTrait;
+use Bupy7\Queue\Exception\InvalidValueException;
 
 class QueueService implements EventManagerAwareInterface
 {
     public const EVENT_ERROR_EXECUTE = 'errorExecute';
+    public const EVENT_BEFORE_ADD = 'beforeAdd';
 
     use EventManagerAwareTrait;
 
@@ -60,6 +62,29 @@ class QueueService implements EventManagerAwareInterface
                 $this->executeTask($entity);
             }
         }
+    }
+
+    public function add(string $name, array $params): void
+    {
+        $task = $this->entityManager->newInstance(TaskEntityInterface::class);
+        if (!$task instanceof TaskEntityInterface) {
+            throw new InvalidValueException(sprintf(
+                'The class "%s" is invalid. Expected instance of "%s"',
+                get_class($task),
+                TaskEntityInterface::class
+            ));
+        }
+
+        $task->getParams()->fromArray($params);
+        $task->setName($name)
+            ->setStatusId(TaskEntityInterface::STATUS_WAIT)
+            ->setCreatedAt(new DateTime)
+            ->setNumberErrors(0);
+
+        $this->getEventManager()->trigger(self::EVENT_BEFORE_ADD, $this, ['task' => $task]);
+
+        $this->entityManager->persist($task);
+        $this->entityManager->flush();
     }
 
     protected function executeTask(TaskEntityInterface $entity): void

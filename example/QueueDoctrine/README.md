@@ -34,7 +34,7 @@ Usage
 2: Add the task to queue:
 
 ```php
-$container->get('Bupy7\Queue\Service\TaskService')->add('Some\Task\TaskNameClass', [
+$container->get('Bupy7\Queue\Service\QueueService')->add('Some\Task\TaskNameClass', [
     'some' => 'param', 
 ]);
 ```

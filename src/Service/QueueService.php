@@ -123,8 +123,7 @@ class QueueService implements EventManagerAwareInterface
                 }
             }
             $entity->setStopAt(new DateTime);
+            $this->entityManager->flush($entity);
         }
-
-        $this->entityManager->flush($entity);
     }
 }

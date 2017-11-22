@@ -10,6 +10,7 @@ use Bupy7\Queue\Service\QueueService;
 use Zend\EventManager\EventInterface;
 use Exception;
 use Bupy7\Queue\Test\Assert\Entity\Task;
+use Zend\Stdlib\ParametersInterface;
 
 /**
  * @author Belosludcev Vasily <https://github.com/bupy7>
@@ -133,5 +134,30 @@ class QueueServiceTest extends TestCase
         } finally {
             $this->assertInstanceOf(Exception::class, $eventException);
         }
+    }
+
+    /**
+     * @since 1.0.1
+     */
+    public function testExecutedEvent()
+    {
+        $sm = $this->getSm($this->memoryConfig);
+
+        $sm->get('MemoryTaskRepository')->entities = [
+            (new Task)->setId(1)->setName('Bupy7\Queue\Test\Assert\Task\SuccessHelloTask'),
+        ];
+
+        $name = null;
+        $params = null;
+        $sm->get('MemoryQueueService')->getEventManager()
+            ->attach(QueueService::EVENT_EXECUTED, function (EventInterface $event) use (&$name, &$params) {
+                $name = $event->getParam('name');
+                $params = $event->getParam('params');
+            });
+
+        $sm->get('MemoryQueueService')->run();
+
+        $this->assertInstanceOf(ParametersInterface::class, $params);
+        $this->assertEquals('Bupy7\Queue\Test\Assert\Task\SuccessHelloTask', $name);
     }
 }

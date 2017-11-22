@@ -12,9 +12,14 @@ interface EntityManagerInterface
      * @return object|null
      */
     public function newInstance(string $name);
+
     /**
      * @param object $entity
      */
     public function persist($entity): void;
-    public function flush(): void;
+
+    /**
+     * @param object|null $entity
+     */
+    public function flush($entity = null): void;
 }

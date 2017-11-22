@@ -18,6 +18,10 @@ use Bupy7\Queue\Exception\InvalidValueException;
 class QueueService implements EventManagerAwareInterface
 {
     public const EVENT_ERROR_EXECUTE = 'errorExecute';
+    /**
+     * @since 1.0.1
+     */
+    public const EVENT_EXECUTED = 'executed';
     public const EVENT_BEFORE_ADD = 'beforeAdd';
 
     use EventManagerAwareTrait;
@@ -101,13 +105,14 @@ class QueueService implements EventManagerAwareInterface
         $task = $this->queueManager->get($entity->getName());
 
         try {
-            if ($task->execute($entity->getParams())) {
+            if ($task->execute(clone $entity->getParams())) {
                 $entity->setStatusId(TaskEntityInterface::STATUS_OK);
             } else {
                 $entity->setStatusId(TaskEntityInterface::STATUS_ERROR);
             }
         } catch (Exception $e) {
             $entity->setStatusId(TaskEntityInterface::STATUS_ERROR);
+
             // event trigger
             $this->getEventManager()->trigger(self::EVENT_ERROR_EXECUTE, $this, [
                 'exception' => $e,
@@ -124,6 +129,13 @@ class QueueService implements EventManagerAwareInterface
             }
             $entity->setStopAt(new DateTime);
             $this->entityManager->flush($entity);
+        }
+
+        if ($entity->getStatusId() === TaskEntityInterface::STATUS_OK) {
+            $this->getEventManager()->trigger(self::EVENT_EXECUTED, $this, [
+                'name' => $entity->getName(),
+                'params' => clone $entity->getParams(),
+            ]);
         }
     }
 }

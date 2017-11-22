@@ -29,7 +29,7 @@ class DummyEntityManager implements EntityManagerInterface
         $this->persist[] = $entity;
     }
 
-    public function flush(): void
+    public function flush($entity = null): void
     {
         foreach ($this->persist as $entity) {
             $this->saved[spl_object_hash($entity)] = $entity;

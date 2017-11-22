@@ -10,7 +10,7 @@ use DateTime;
 use Bupy7\Queue\Exception\UnknownTaskException;
 use Bupy7\Queue\Task\TaskInterface;
 use Bupy7\Queue\Options\ModuleOptions;
-use Exception;
+use Throwable;
 use Zend\EventManager\EventManagerAwareInterface;
 use Zend\EventManager\EventManagerAwareTrait;
 use Bupy7\Queue\Exception\InvalidValueException;
@@ -110,7 +110,7 @@ class QueueService implements EventManagerAwareInterface
             } else {
                 $entity->setStatusId(TaskEntityInterface::STATUS_ERROR);
             }
-        } catch (Exception $e) {
+        } catch (Throwable $e) {
             $entity->setStatusId(TaskEntityInterface::STATUS_ERROR);
 
             // event trigger

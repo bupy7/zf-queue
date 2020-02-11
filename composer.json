@@ -1,50 +1,49 @@
 {
-    "name": "bupy7/zf-queue",
-    "description": "Queue module for Zend Framework 3.",
-    "version": "1.0.2",
-    "license": "BSD-3-Clause",
-    "keywords": [
-        "zend",
-        "queue",
-        "zf",
-        "zf3",
-        "task",
-        "manager",
-        "async"
-    ],
-    "authors": [
-        {
-            "name": "Vasily Belosludcev",
-            "email": "bupy765@gmail.com",
-            "homepage": "http://mihaly4.ru"
-        }
-    ],
-    "require": {
-        "php": "^7.1",
-        "container-interop/container-interop": "^1.2",
-        "zendframework/zend-stdlib": "^3.1",
-        "zendframework/zend-modulemanager": "^2.7",
-        "zendframework/zend-servicemanager": "^3.1"
-    },
-    "require-dev": {
-        "zendframework/zend-test": "^3.0",
-        "friendsofphp/php-cs-fixer": "^2.4",
-        "phpunit/phpunit": "^6.0",
-        "satooshi/php-coveralls": "^1.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Bupy7\\Queue\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Bupy7\\Queue\\Test\\": "test/"
-        }
-    },
-    "scripts": {
-        "test": "php vendor/bin/phpunit --debug --verbose",
-        "test:no-coverage": "php vendor/bin/phpunit --debug --verbose --no-coverage",
-        "fixer": "php vendor/bin/php-cs-fixer fix --config=phpcs.php"
+  "name": "bupy7/zf-queue",
+  "description": "Queue module for Zend Framework 3.",
+  "version": "1.0.3",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "zend",
+    "queue",
+    "zf",
+    "zf3",
+    "task",
+    "manager",
+    "async"
+  ],
+  "authors": [
+    {
+      "name": "Vasily Beloslodcev",
+      "email": "vasily.belosloodcev@gmail.com"
     }
+  ],
+  "require": {
+    "php": "^7.1",
+    "container-interop/container-interop": "^1.2",
+    "zendframework/zend-stdlib": "^3.1",
+    "zendframework/zend-modulemanager": "^2.7",
+    "zendframework/zend-servicemanager": "^3.1"
+  },
+  "require-dev": {
+    "zendframework/zend-test": "^3.0",
+    "friendsofphp/php-cs-fixer": "^2.4",
+    "phpunit/phpunit": "^6.0",
+    "php-coveralls/php-coveralls": "^2.2"
+  },
+  "autoload": {
+    "psr-4": {
+      "Bupy7\\Queue\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Bupy7\\Queue\\Test\\": "test/"
+    }
+  },
+  "scripts": {
+    "test": "php vendor/bin/phpunit --debug --verbose",
+    "test:no-coverage": "php vendor/bin/phpunit --debug --verbose --no-coverage",
+    "fixer": "php vendor/bin/php-cs-fixer fix --config=phpcs.php"
+  }
 }

@@ -1,4 +1,5 @@
 language: php
+
 php:
   - '7.1'
   - '7.2'
@@ -9,4 +10,4 @@ before_script:
   - composer install --no-interaction
 
 after_script:
-  - vendor/bin/coveralls -v
+  - vendor/bin/php-coveralls -v

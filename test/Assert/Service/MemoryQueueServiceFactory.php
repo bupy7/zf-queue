@@ -3,7 +3,7 @@
 namespace Bupy7\Queue\Test\Assert\Service;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 use Bupy7\Queue\Service\QueueService;
 
 /**

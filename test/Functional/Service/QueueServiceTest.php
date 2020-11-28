@@ -7,10 +7,10 @@ use Bupy7\Queue\Test\Functional\AppTrait;
 use Bupy7\Queue\Entity\TaskInterface;
 use DateTime;
 use Bupy7\Queue\Service\QueueService;
-use Zend\EventManager\EventInterface;
+use Laminas\EventManager\EventInterface;
 use Exception;
 use Bupy7\Queue\Test\Assert\Entity\Task;
-use Zend\Stdlib\ParametersInterface;
+use Laminas\Stdlib\ParametersInterface;
 
 /**
  * @author Belosludcev Vasily <https://github.com/bupy7>

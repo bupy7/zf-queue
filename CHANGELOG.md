@@ -1,6 +1,11 @@
 zf-queue
 ========
 
+2.0.0 [2020-11-28]
+------------------
+
+- Enh: Migrated Zend-packages to Laminas-packages.
+
 1.0.3 [2020-02-11]
 ------------------
 

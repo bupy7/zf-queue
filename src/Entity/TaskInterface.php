@@ -3,7 +3,7 @@
 namespace Bupy7\Queue\Entity;
 
 use DateTime;
-use Zend\Stdlib\ParametersInterface;
+use Laminas\Stdlib\ParametersInterface;
 
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>

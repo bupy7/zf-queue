@@ -2,9 +2,9 @@
 
 namespace QueueDoctrine;
 
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\BootstrapListenerInterface;
-use Zend\EventManager\EventInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\Feature\BootstrapListenerInterface;
+use Laminas\EventManager\EventInterface;
 use QueueDoctrine\Type\ParamsType;
 use Doctrine\DBAL\Types\Type;
 

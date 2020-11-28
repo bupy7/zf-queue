@@ -7,7 +7,7 @@ Requirements
 ------------
 
 - [Doctrine 2 ORM](https://github.com/doctrine/DoctrineORMModule)
-- [Zend MVC](https://github.com/zendframework/zend-mvc)
+- [Laminas MVC](https://github.com/laminas/laminas-mvc)
 
 Install
 -------

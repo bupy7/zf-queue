@@ -8,7 +8,7 @@ zf-queue
 [![Build Status](https://travis-ci.org/bupy7/zf-queue.svg?branch=master)](https://travis-ci.org/bupy7/zf-queue)
 [![Coverage Status](https://coveralls.io/repos/github/bupy7/zf-queue/badge.svg?branch=master)](https://coveralls.io/github/bupy7/zf-queue?branch=master)
 
-Abstract queue module for Zend Framework 3. Module contains **only** abstract layers to create
+Abstract queue module for Laminas. Module contains **only** abstract layers to create
 their own integrations using this module.
 
 Installation
@@ -54,7 +54,7 @@ Usage
 namespace YourModule\Task;
 
 use Bupy7\Queue\Task\TaskInterface;
-use Zend\Stdlib\ParametersInterface;
+use Laminas\Stdlib\ParametersInterface;
 use Chat\Service\ChatService;
 
 class SendAccountTask implements TaskInterface
@@ -93,7 +93,7 @@ namespace YourModule;
 return [
     'queue_manager' => [
         'factories' => [
-            Task\ExampleTask::class => \Zend\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory::class,
+            Task\ExampleTask::class => \Laminas\ServiceManager\AbstractFactory\ReflectionBasedAbstractFactory::class,
         ],
     ],
 ];

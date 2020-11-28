@@ -2,9 +2,9 @@
 
 namespace Bupy7\Queue;
 
-use Zend\ModuleManager\Feature\ConfigProviderInterface;
-use Zend\ModuleManager\Feature\InitProviderInterface;
-use Zend\ModuleManager\ModuleManagerInterface;
+use Laminas\ModuleManager\Feature\ConfigProviderInterface;
+use Laminas\ModuleManager\Feature\InitProviderInterface;
+use Laminas\ModuleManager\ModuleManagerInterface;
 
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>
@@ -20,7 +20,7 @@ class Module implements ConfigProviderInterface, InitProviderInterface
     {
         $event = $manager->getEvent();
         $container = $event->getParam('ServiceManager');
-        /** @var \Zend\ModuleManager\Listener\ServiceListener $serviceListener */
+        /** @var \Laminas\ModuleManager\Listener\ServiceListener $serviceListener */
         $serviceListener = $container->get('ServiceListener');
         $serviceListener->addServiceManager(
             'Bupy7\Queue\Manager\QueueManager',

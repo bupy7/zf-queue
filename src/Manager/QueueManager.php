@@ -3,7 +3,7 @@
 namespace Bupy7\Queue\Manager;
 
 use Bupy7\Queue\Task\TaskInterface;
-use Zend\ServiceManager\AbstractPluginManager;
+use Laminas\ServiceManager\AbstractPluginManager;
 
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>

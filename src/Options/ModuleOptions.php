@@ -2,7 +2,7 @@
 
 namespace Bupy7\Queue\Options;
 
-use Zend\Stdlib\AbstractOptions;
+use Laminas\Stdlib\AbstractOptions;
 
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>

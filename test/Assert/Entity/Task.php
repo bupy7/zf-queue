@@ -5,8 +5,8 @@ namespace Bupy7\Queue\Test\Assert\Entity;
 use DateTime;
 use Bupy7\Queue\Exception\InvalidArgumentException;
 use Bupy7\Queue\Entity\TaskInterface;
-use Zend\Stdlib\ParametersInterface;
-use Zend\Stdlib\Parameters;
+use Laminas\Stdlib\ParametersInterface;
+use Laminas\Stdlib\Parameters;
 
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>

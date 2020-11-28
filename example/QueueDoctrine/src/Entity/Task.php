@@ -6,8 +6,8 @@ use DateTime;
 use InvalidArgumentException;
 use Bupy7\Queue\Entity\TaskInterface;
 use Application\Entity\EntityAbstract;
-use Zend\Stdlib\ParametersInterface;
-use Zend\Stdlib\Parameters;
+use Laminas\Stdlib\ParametersInterface;
+use Laminas\Stdlib\Parameters;
 
 class Task extends EntityAbstract implements TaskInterface
 {

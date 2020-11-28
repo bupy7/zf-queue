@@ -11,8 +11,8 @@ use Bupy7\Queue\Exception\UnknownTaskException;
 use Bupy7\Queue\Task\TaskInterface;
 use Bupy7\Queue\Options\ModuleOptions;
 use Throwable;
-use Zend\EventManager\EventManagerAwareInterface;
-use Zend\EventManager\EventManagerAwareTrait;
+use Laminas\EventManager\EventManagerAwareInterface;
+use Laminas\EventManager\EventManagerAwareTrait;
 use Bupy7\Queue\Exception\InvalidValueException;
 
 class QueueService implements EventManagerAwareInterface

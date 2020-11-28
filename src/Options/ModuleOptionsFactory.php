@@ -3,7 +3,7 @@
 namespace Bupy7\Queue\Options;
 
 use Interop\Container\ContainerInterface;
-use Zend\ServiceManager\Factory\FactoryInterface;
+use Laminas\ServiceManager\Factory\FactoryInterface;
 
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>

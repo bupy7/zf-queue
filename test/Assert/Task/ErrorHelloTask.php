@@ -3,7 +3,7 @@
 namespace Bupy7\Queue\Test\Assert\Task;
 
 use Bupy7\Queue\Task\TaskInterface;
-use Zend\Stdlib\ParametersInterface;
+use Laminas\Stdlib\ParametersInterface;
 
 /**
  * @author Vasily Belosludcev <https://github.com/bupy7>

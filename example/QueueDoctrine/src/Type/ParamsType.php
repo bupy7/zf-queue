@@ -4,7 +4,7 @@ namespace QueueDoctrine\Type;
 
 use Doctrine\DBAL\Types\JsonArrayType;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Zend\Stdlib\Parameters;
+use Laminas\Stdlib\Parameters;
 
 class ParamsType extends JsonArrayType
 {
